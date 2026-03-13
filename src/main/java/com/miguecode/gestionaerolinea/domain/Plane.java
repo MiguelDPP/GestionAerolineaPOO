@@ -24,4 +24,9 @@ public class Plane {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s %-20s %-20s %-10s", this.id, this.destination, this.pilotName, this.price);
+    }
 }

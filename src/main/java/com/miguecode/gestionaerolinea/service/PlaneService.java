@@ -10,7 +10,7 @@ public class PlaneService {
     private static final PlaneService INSTANCE = new  PlaneService();
 
     private PlaneService(){
-        planes = new ArrayList<>();
+        this.planes = new ArrayList<>();
     }
 
     public static PlaneService getInstance(){
@@ -18,6 +18,10 @@ public class PlaneService {
     }
 
     public void addPlane(String pilotName, double price, String destination, int rows, int columns) {
-        planes.add(new Plane(pilotName, price, destination, rows, columns));
+        this.planes.add(new Plane(pilotName, price, destination, rows, columns));
+    }
+
+    public List<Plane> getPlanes() {
+        return this.planes;
     }
 }
