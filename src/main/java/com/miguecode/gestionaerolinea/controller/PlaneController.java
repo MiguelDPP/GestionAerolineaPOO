@@ -1,5 +1,7 @@
 package com.miguecode.gestionaerolinea.controller;
 
+import com.miguecode.gestionaerolinea.domain.Plane;
+import com.miguecode.gestionaerolinea.domain.Seat;
 import com.miguecode.gestionaerolinea.service.PlaneService;
 import com.miguecode.gestionaerolinea.ui.Printer;
 import com.miguecode.gestionaerolinea.util.Console;
@@ -28,6 +30,13 @@ public class PlaneController {
     public void sellSeat() {
         System.out.println("---- Vender Asiento ----");
         this.showPlane();
+        int planeId = Console.readValidator("Ingrese el Id del vuelo: ", Integer::parseInt, Validator::positiveNumber);
+        try {
+            Seat[][] seats = this.planeService.getSeatsByPlaneId(planeId);
+            Printer.printSeats(seats);
+        } catch (RuntimeException e) {
+            Console.printException(e);
+        }
 
     }
 
