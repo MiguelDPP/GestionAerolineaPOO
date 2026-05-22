@@ -1,5 +1,6 @@
 package com.miguecode.gestionaerolinea.ui;
 
+import com.miguecode.gestionaerolinea.domain.Food;
 import com.miguecode.gestionaerolinea.domain.Plane;
 import com.miguecode.gestionaerolinea.domain.Seat;
 
@@ -17,6 +18,21 @@ public class Printer {
         }
         for (Plane plane : planes) {
             System.out.println(plane);
+        }
+        System.out.println();
+    }
+
+    public static void printFoods(List<Food> foods) {
+        System.out.printf("%-24sListado De Comidas\n","");
+        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.printf("%-10s %-20s %-10s\n", "Id", "Nombre", "Precio");
+        System.out.println("----------------------------------------------------------------------------------------");
+        if (foods.isEmpty()) {
+            System.out.println("No hay comida en el menú");
+            return;
+        }
+        for (Food food : foods) {
+            System.out.println(food);
         }
         System.out.println();
     }

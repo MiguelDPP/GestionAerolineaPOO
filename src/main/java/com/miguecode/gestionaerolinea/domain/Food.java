@@ -12,4 +12,13 @@ public class Food {
         this.price = price;
     }
 
+    public boolean checkId(int id) {
+        return this.id == id;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s %-20s %-10s", this.id, this.name, this.price);
+    }
+
 }

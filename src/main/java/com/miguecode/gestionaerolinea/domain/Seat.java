@@ -24,4 +24,22 @@ public class Seat {
     public String getSeatNumber() {
         return seatNumber;
     }
+
+    //Ocupar asiento
+    public void setIsAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public void addFood(Food food) {
+        this.foods.add(food);
+    }
+
+    public boolean checkClient(Client client) {
+        if (this.client == null) return false;
+        return this.client.getDocumentoId() ==  client.getDocumentoId(); // Igual se puede comparar referencias
+    }
 }

@@ -19,6 +19,29 @@ public class Plane {
         this.fillSeats();
     }
 
+    public boolean checkClient (Client client) {
+        for (Seat[] rowSeat: this.seats) {
+            for (Seat seat: rowSeat) {
+                if (seat.checkClient(client)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public Seat getSeatByClient (Client client) {
+        for (Seat[] rowSeat: this.seats) {
+            for (Seat seat: rowSeat) {
+                if (seat.checkClient(client)) {
+                    return seat;
+                }
+            }
+        }
+        return null;
+    }
+
     private void fillSeats() {
         int counter = 1;
         for (int i = 0; i < seats.length; i++) {
@@ -27,6 +50,17 @@ public class Plane {
                 counter++;
             }
         }
+    }
+
+    public Seat getSeat(int seatNumber) {
+        int columns = this.seats[0].length;
+        int row = (seatNumber/columns);
+        int column = (seatNumber%columns) - 1;
+        if (column < 0) {
+            column = columns - 1;
+            row--;
+        }
+        return seats[row][column];
     }
 
 
