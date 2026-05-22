@@ -66,8 +66,38 @@ public class PlaneController {
 
     }
 
-    public void showTotalForClient() {
 
+
+    public void showTotalForClient() {
+        try {
+            long documentId = Console.readValidator("Ingrese su numero de documento: ", Long::parseLong, Validator::positiveNumber);
+            Client client = clientService.getClient(documentId);
+
+            if (client == null) {
+                throw new EntityNotFoundException("Cliente no encontrado");
+            }
+
+            List<Plane> planes = this.planeService.getPlanesByClient(client);
+            Printer.printPlanes(planes);
+
+            int planeId = Console.readValidator("Ingrese el Id del vuelo: ", Integer::parseInt, Validator::positiveNumber);
+            Seat seat = this.planeService.getSeatByPlaneAndClient(planeId, client);
+            Plane plane = this.planeService.getPlaneById(planeId);
+
+            System.out.println("---- Resumen de su factura ----");
+            System.out.println("Destino del vuelo: "+plane.getDestination());
+            System.out.println("Asiento Encontrado: "+seat.getSeatNumber());
+            System.out.println("Valor del Asiento: "+ plane.getPrice());
+
+            double priceFood = seat.getFoodTotalPrice();
+            Printer.printResumeFoods(seat.getFoods(), priceFood);
+
+            System.out.println("-------------------------------------------------------");
+            System.out.println("Total a pagar: "+(priceFood+plane.getPrice()));
+            System.out.println("-------------------------------------------------------");
+        } catch (RuntimeException e) {
+            Console.printException(e);
+        }
     }
 
     public void placeFoodOrder() {
@@ -89,9 +119,9 @@ public class PlaneController {
             Seat seat = this.planeService.getSeatByPlaneAndClient(planeId, client);
             System.out.println("--- Asiento Encontrado: "+seat.getSeatNumber()+" ----");
 
-            char confirm = Console.read("Precione la tecla [S] si desea continuar, de lo contrario precione cualquier tecla", String::toString).toLowerCase().charAt(0);
+            String confirm = Console.read("Precione la tecla [S] si desea continuar, de lo contrario precione cualquier tecla: ", String::toString).toLowerCase();
 
-            if (confirm == 's') {
+            if (confirm.equals("s")) {
                 seat.addFood(food);
                 System.out.println("---- Comida agregada correctamente ----");
             } else {

@@ -25,6 +25,19 @@ public class Seat {
         return seatNumber;
     }
 
+    public List<Food> getFoods() {
+        return foods;
+    }
+
+    public double getFoodTotalPrice () {
+        double total = 0;
+        for(Food food: this.foods) {
+            total+= food.getPrice();
+        }
+
+        return total;
+    }
+
     //Ocupar asiento
     public void setIsAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;

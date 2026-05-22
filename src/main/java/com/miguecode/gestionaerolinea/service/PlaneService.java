@@ -44,6 +44,15 @@ public class PlaneService {
 
         return  clientPlanes;
     }
+    public double getPriceByPlaneId(int planeId) {
+        for (Plane plane: this.planes) {
+            if (plane.checkId(planeId)) {
+                return plane.getPrice();
+            }
+        }
+
+        throw new EntityNotFoundException("Vuelo con el id: "+planeId+" No encontrado");
+    }
 
     public Seat[][] getSeatsByPlaneId(int planeId) {
         Plane plane = getPlaneById(planeId);

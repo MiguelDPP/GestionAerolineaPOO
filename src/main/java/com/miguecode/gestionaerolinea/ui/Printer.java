@@ -37,6 +37,15 @@ public class Printer {
         System.out.println();
     }
 
+    public static void printResumeFoods(List<Food> foods, double total) {
+        printFoods(foods);
+        if (!foods.isEmpty()) {
+            System.out.println("----------------------------------------------------------------------------------------");
+            System.out.printf("%-30s %-10s\n", "Total en comida", total);
+            System.out.println("----------------------------------------------------------------------------------------");
+        }
+    }
+
     public static void printSeats(Seat[][] seats) {
         System.out.printf("%-24sListado De Asientos\n","");
         System.out.println("Asientos marcados con XX se encuentran ocupados");

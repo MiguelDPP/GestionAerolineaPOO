@@ -21,4 +21,7 @@ public class Food {
         return String.format("%-10s %-20s %-10s", this.id, this.name, this.price);
     }
 
+    public double getPrice() {
+        return price;
+    }
 }

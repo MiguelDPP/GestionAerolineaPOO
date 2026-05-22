@@ -19,6 +19,10 @@ public class Plane {
         this.fillSeats();
     }
 
+    public String getDestination() {
+        return destination;
+    }
+
     public boolean checkClient (Client client) {
         for (Seat[] rowSeat: this.seats) {
             for (Seat seat: rowSeat) {
@@ -29,6 +33,10 @@ public class Plane {
         }
 
         return false;
+    }
+
+    public double getPrice() {
+        return this.price;
     }
 
     public Seat getSeatByClient (Client client) {
